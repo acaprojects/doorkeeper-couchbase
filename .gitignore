@@ -12,7 +12,6 @@ spec/generators/tmp
 .rvmrc
 *.swp
 .idea
-spec
 
 /Gemfile
 

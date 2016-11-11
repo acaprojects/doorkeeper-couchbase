@@ -3,7 +3,7 @@ require 'rspec/core/rake_task'
 
 task :load_doorkeeper do
   `rm -rf spec/`
-  `git checkout spec`
+  `git checkout -- spec`
   `git submodule init`
   `git submodule update`
   `cp -r -n doorkeeper/spec .`

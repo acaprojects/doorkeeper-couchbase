@@ -1,0 +1,17 @@
+common: &common
+  hosts: localhost
+  password:
+
+development:
+  <<: *common
+  bucket: default
+
+test:
+  <<: *common
+  bucket: test
+  password: password123
+
+# set these environment variables on your production server
+production:
+  hosts: 127.0.0.1
+  bucket: default
