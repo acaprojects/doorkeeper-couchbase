@@ -2,10 +2,10 @@ module Doorkeeper
     module Orm
         module Couchbase
             def self.initialize_models!
-                require 'doorkeeper/orm/couchbase/timestamps'
-                require 'doorkeeper/orm/couchbase/access_grant'
-                require 'doorkeeper/orm/couchbase/access_token'
-                require 'doorkeeper/orm/couchbase/application'
+                require 'support/orm/couchbase/timestamps'
+                require 'support/orm/couchbase/access_grant'
+                require 'support/orm/couchbase/access_token'
+                require 'support/orm/couchbase/application'
             end
 
             def self.initialize_application_owner!

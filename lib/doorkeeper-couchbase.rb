@@ -1,7 +1,7 @@
 require 'doorkeeper-couchbase/version'
 
 require 'doorkeeper'
-require 'doorkeeper/orm/couchbase'
+require 'support/orm/couchbase'
 
 module DoorkeeperCouchbase
 end
