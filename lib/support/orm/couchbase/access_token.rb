@@ -19,6 +19,7 @@ module Doorkeeper
         attribute   :resource_owner_id,
                     :token,
                     :refresh_token,
+                    :previous_refresh_token,
                     :scopes,
                     :redirect_uri, type: String
 
@@ -41,6 +42,10 @@ module Doorkeeper
 
 
         class << self
+            def refresh_token_revoked_on_use?
+                true
+            end
+
             # Returns an instance of the Doorkeeper::AccessToken with
             # specific token value.
             #
