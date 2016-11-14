@@ -28,14 +28,13 @@ module Doorkeeper
         end
 
 
-        ensure_unique :uid
         has_many :access_grants, dependent: :destroy, class_name: 'Doorkeeper::AccessGrant'
         has_many :access_tokens, dependent: :destroy, class_name: 'Doorkeeper::AccessToken'
 
 
         class << self
             # defined by ensure_unique
-            alias_method :by_uid, :find_by_uid
+            def :by_uid, :find_by_id
 
             def by_uid_and_secret(uid, secret)
                 app = find_by_id(uid)
@@ -65,7 +64,7 @@ module Doorkeeper
 
         def generate_uid
             if uid.blank?
-                self.uid = UniqueToken.generate
+                self.id = self.uid = UniqueToken.generate
             end
         end
 

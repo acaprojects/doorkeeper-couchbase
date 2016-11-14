@@ -50,8 +50,7 @@ module Doorkeeper
         # @return [String] token value
         #
         def generate_token
-            self.token = UniqueToken.generate
-            self.id    = self.token
+            self.id = self.token = UniqueToken.generate
         end
     end
 end

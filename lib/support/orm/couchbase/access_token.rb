@@ -28,7 +28,6 @@ module Doorkeeper
 
         validates :resource_owner_id, :application, :expires_in, :redirect_uri, presence: true
         ensure_unique :refresh_token, presence: false
-        ensure_unique :token
 
 
         index_view :resource_owner_id
@@ -55,9 +54,7 @@ module Doorkeeper
             # @return [Doorkeeper::AccessToken, nil] AccessToken object or nil
             #   if there is no record with such token
             #
-            def by_token(token)
-                find_by_id(token)
-            end
+            def :by_token, :find_by_id
 
             # Returns an instance of the Doorkeeper::AccessToken
             # with specific token value.
@@ -267,7 +264,7 @@ module Doorkeeper
             self.created_at ||= Time.now.utc
 
             generator = Doorkeeper.configuration.access_token_generator.constantize
-            self.token = generator.generate(
+            self.id = self.token = generator.generate(
                 resource_owner_id: resource_owner_id,
                 scopes: scopes,
                 application: application,
