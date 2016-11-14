@@ -29,7 +29,6 @@ module Doorkeeper
 
 
         validates :resource_owner_id, :application, :token, :expires_in, :redirect_uri, presence: true
-        ensure_unique :token
 
 
         before_validation :generate_token, on: :create
@@ -50,7 +49,9 @@ module Doorkeeper
         # @return [String] token value
         #
         def generate_token
-            self.id = self.token = UniqueToken.generate
+            if self.token.blank?
+                self.id = self.token = UniqueToken.generate
+            end
         end
     end
 end

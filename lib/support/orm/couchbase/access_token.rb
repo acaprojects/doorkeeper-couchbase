@@ -19,14 +19,13 @@ module Doorkeeper
         attribute   :resource_owner_id,
                     :token,
                     :refresh_token,
-                    :previous_refresh_token,
-                    :scopes,
-                    :redirect_uri, type: String
+                    :scopes,                 type: String
+        attribute   :previous_refresh_token, type: String, default: proc { '' }
 
         attribute   :expires_in,   type: Integer
 
 
-        validates :resource_owner_id, :application, :expires_in, :redirect_uri, presence: true
+        validates :resource_owner_id, :application, :expires_in, :token, presence: true
         ensure_unique :refresh_token, presence: false
 
 
@@ -257,10 +256,14 @@ module Doorkeeper
         # @return [String] refresh token value
         #
         def generate_refresh_token
-            write_attribute :refresh_token, UniqueToken.generate
+            if self.refresh_token.blank?
+                write_attribute :refresh_token, UniqueToken.generate
+            end
         end
 
         def generate_token
+            return if self.token.present?
+
             self.created_at ||= Time.now.utc
 
             generator = Doorkeeper.configuration.access_token_generator.constantize
