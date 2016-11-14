@@ -54,7 +54,7 @@ module Doorkeeper
             # @return [Doorkeeper::AccessToken, nil] AccessToken object or nil
             #   if there is no record with such token
             #
-            def :by_token, :find_by_id
+            alias_method :by_token, :find_by_id
 
             # Returns an instance of the Doorkeeper::AccessToken
             # with specific token value.

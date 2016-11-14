@@ -23,8 +23,8 @@ module Doorkeeper
         attribute   :expires_in,   type: Integer
         
 
-        def self.by_token(token)
-            find_by_id(token)
+        class << self
+            alias_method :by_token, :find_by_id
         end
 
 

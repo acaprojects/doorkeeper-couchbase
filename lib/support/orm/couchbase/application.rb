@@ -33,8 +33,7 @@ module Doorkeeper
 
 
         class << self
-            # defined by ensure_unique
-            def :by_uid, :find_by_id
+            alias_method :by_uid, :find_by_id
 
             def by_uid_and_secret(uid, secret)
                 app = find_by_id(uid)
