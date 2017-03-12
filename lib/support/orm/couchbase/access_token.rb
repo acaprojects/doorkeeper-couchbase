@@ -244,6 +244,11 @@ module Doorkeeper
             accessible? && includes_scope?(*scopes)
         end
 
+
+        def transaction; yield; end
+        def lock!; end
+
+
         private
 
 

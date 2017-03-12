@@ -40,6 +40,9 @@ module Doorkeeper
             super(**options)
         end
 
+        def transaction; yield; end
+        def lock!; end
+
 
         private
 
