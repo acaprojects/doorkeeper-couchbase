@@ -19,6 +19,8 @@ module Doorkeeper
                   :scopes,
                   :redirect_uri, type: String
 
+        attribute :skip_authorization, type: Boolean, default: false
+
 
         belongs_to :owner, polymorphic: true
         
