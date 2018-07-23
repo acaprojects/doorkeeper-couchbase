@@ -171,11 +171,9 @@ module Doorkeeper
                     end
                 end
 
-                app_id = application.try(:id)
-
                 create!(
-                    application_id:    app_id,
-                    resource_owner_id: resource_owner_id || app_id,
+                    application_id:    application.try(:id),
+                    resource_owner_id: resource_owner_id || application.try(:owner_id),
                     scopes:            scopes.to_s,
                     expires_in:        expires_in,
                     use_refresh_token: use_refresh_token
