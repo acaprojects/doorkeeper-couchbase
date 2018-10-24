@@ -20,10 +20,11 @@ module Doorkeeper
                   :redirect_uri, type: String
 
         attribute :skip_authorization, type: Boolean, default: false
+        attribute :confidential, type: Boolean, default: false
 
 
         belongs_to :owner, polymorphic: true
-        
+
         validates :owner, presence: true, if: :validate_owner?
         def validate_owner?
             Doorkeeper.configuration.confirm_application_owner?
@@ -56,6 +57,7 @@ module Doorkeeper
 
         validates :name, :secret, :uid, presence: true
         validates :redirect_uri, redirect_uri: true
+        validates :confidential, inclusion: { in: [true, false] }
 
         before_validation :generate_uid, :generate_secret, on: :create
 
